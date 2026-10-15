@@ -1,0 +1,24 @@
+{
+  "name": "staymate-root",
+  "version": "1.0.0",
+  "description": "StayMate – PG, Flat, Roommate & Mess Finder (MCA Mini Project)",
+  "scripts": {
+    "seed": "npm --prefix backend run seed",
+    "test": "npm --prefix backend test",
+    "build": "npm --prefix frontend run build",
+    "start:backend": "npm --prefix backend start",
+    "start:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev"
+  },
+  "keywords": [
+    "mern-stack",
+    "accommodation-finder",
+    "pg-finder",
+    "roommate-matching",
+    "socket-io",
+    "mca-project"
+  ],
+  "author": "StayMate Team",
+  "license": "ISC"
+}

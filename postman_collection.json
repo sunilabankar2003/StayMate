@@ -1,0 +1,224 @@
+{
+  "info": {
+    "name": "StayMate API Collection",
+    "_postman_id": "staymate-api-collection-2026",
+    "description": "Comprehensive Postman collection for StayMate – PG, Flat, Roommate & Mess Finder API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Student",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Vikram Malhotra\",\n  \"email\": \"vikram@example.com\",\n  \"password\": \"Password@123\",\n  \"role\": \"student\",\n  \"phone\": \"+91 98888 77777\",\n  \"occupation\": \"MCA Student\",\n  \"gender\": \"male\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Login (Student)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"student1@staymate.com\",\n  \"password\": \"Student@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Login (Owner)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"owner1@staymate.com\",\n  \"password\": \"Owner@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Login (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@staymate.com\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Current User (Me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth", "logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Properties",
+      "item": [
+        {
+          "name": "Search Approved Properties",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/properties?city=Bangalore&propertyType=PG&minRent=5000&maxRent=15000",
+              "host": ["{{baseUrl}}"],
+              "path": ["properties"],
+              "query": [
+                { "key": "city", "value": "Bangalore" },
+                { "key": "propertyType", "value": "PG" },
+                { "key": "minRent", "value": "5000" },
+                { "key": "maxRent", "value": "15000" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Property Details by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/properties/{{propertyId}}", "host": ["{{baseUrl}}"], "path": ["properties", "{{propertyId}}"] }
+          }
+        },
+        {
+          "name": "Create Property Listing (Owner)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Maple Leaf Student PG Koramangala\",\n  \"description\": \"Spacious double sharing rooms with attached bath, high speed wifi, and food.\",\n  \"propertyType\": \"PG\",\n  \"monthlyRent\": 9500,\n  \"securityDeposit\": 19000,\n  \"address\": \"14th Main, 4th Block\",\n  \"locality\": \"Koramangala\",\n  \"city\": \"Bangalore\",\n  \"occupancyType\": \"Double\",\n  \"genderPreference\": \"Male\",\n  \"amenities\": [\"WiFi\", \"RO Water\", \"Power Backup\"],\n  \"foodAvailability\": true,\n  \"foodType\": \"Both\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/properties", "host": ["{{baseUrl}}"], "path": ["properties"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roommates",
+      "item": [
+        {
+          "name": "Discover Compatible Roommates",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }],
+            "url": { "raw": "{{baseUrl}}/roommates?city=Bangalore", "host": ["{{baseUrl}}"], "path": ["roommates"] }
+          }
+        },
+        {
+          "name": "Send Connection Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{studentToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Hey, our preferences match! Would love to find a 2BHK flat together.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/roommates/{{candidateId}}/connect", "host": ["{{baseUrl}}"], "path": ["roommates", "{{candidateId}}", "connect"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mess Services",
+      "item": [
+        {
+          "name": "Search Mess Listings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/mess?city=Bangalore&foodType=Veg", "host": ["{{baseUrl}}"], "path": ["mess"] }
+          }
+        },
+        {
+          "name": "Get Mess Details by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/mess/{{messId}}", "host": ["{{baseUrl}}"], "path": ["mess", "{{messId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/stats", "host": ["{{baseUrl}}"], "path": ["admin", "stats"] }
+          }
+        },
+        {
+          "name": "Verify Property (Approve / Reject)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/admin/properties/{{propertyId}}/verify", "host": ["{{baseUrl}}"], "path": ["admin", "properties", "{{propertyId}}", "verify"] }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" },
+    { "key": "studentToken", "value": "" },
+    { "key": "ownerToken", "value": "" },
+    { "key": "adminToken", "value": "" },
+    { "key": "propertyId", "value": "" },
+    { "key": "candidateId", "value": "" },
+    { "key": "messId", "value": "" }
+  ]
+}
